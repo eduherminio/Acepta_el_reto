@@ -12,7 +12,7 @@ int main()
 	{
 		int n_veh;
 		std::cin >> n_veh;
-		auto t_a_x0__speed = std::list<std::pair<int, int>>();
+		auto time_at_x0_and_speed = std::list<std::pair<int, int>>();
 
 		for (int i = 0; i < n_veh; ++i)
 		{
@@ -22,24 +22,21 @@ int main()
 
 			if (t_at_x0 >= 0)
 			{
-				t_a_x0__speed.push_back(std::make_pair(t_at_x0, v));
+				time_at_x0_and_speed.push_back(std::make_pair(t_at_x0, v));
 			}
 		}
-
-		t_a_x0__speed.sort(
-			[](std::pair<int, int> a, std::pair<int, int> b) { return a.second > b.second; });
 
 		auto calculate_t = [long_trayecto](std::pair<int, int> pair)
 		{
 			return pair.first + long_trayecto / pair.second;
 		};
 
-		t_a_x0__speed.sort([calculate_t](
+		time_at_x0_and_speed.sort([calculate_t](
 			std::pair<int, int> a, std::pair<int, int> b)
 		{
 			return calculate_t(a) < calculate_t(b);
 		});
 
-		std::cout << calculate_t(*(t_a_x0__speed.begin())) << std::endl;
+		std::cout << calculate_t(*(time_at_x0_and_speed.begin())) << std::endl;
 	}
 }
